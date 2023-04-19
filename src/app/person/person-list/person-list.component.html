@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+      <tr>
+        <td>#</td>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of objects; let i = index" (click)="onSelected(i)"
+      [ngClass]="person == selected ? 'table-info' : '' ">
+         <td>{{i+1}}</td>
+        <td>{{person.firstname}}</td>
+        <td>{{person.lastname}}</td>
+        <td>{{person.email}}</td>
+      </tr>
+     
+    </tbody>
+  </table>
