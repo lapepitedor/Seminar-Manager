@@ -1,5 +1,6 @@
-import { Component,OnInit } from '@angular/core';
-import { Person } from 'src/app/model/person';
+import { Component, OnInit } from '@angular/core';
+import { Person } from 'src/app/model/Person';
+import { PersonService } from 'src/app/shared/person.service';
 
 @Component({
   selector: 'app-person-list',
@@ -9,18 +10,29 @@ import { Person } from 'src/app/model/person';
 export class PersonListComponent implements OnInit {
   selected: Person | null = null;
 
-  objects: Person[] =
-    [
-    new Person('1', 'Messu', 'Brinda', 'mb@gmail.com'),
-    new Person('2', 'Alex ', 'Mbida', 'am@gmail.com'),
-    new Person('3', 'Marco', 'Koung', 'mg@gmail.com'),
-  ];
-  constructor() {}
+  objects: Person[] = [];
+
+  constructor(private service: PersonService) {
+    this.objects = this.service.getAll();
+    this.service.changed.subscribe(() => {
+      this.objects = this.service.getAll();
+      this.selected = null;
+    });
+  }
 
   ngOnInit(): void {}
 
   onSelected(index: number) {
     this.selected = this.objects[index];
-    console.log(this.selected);
+  }
+
+  onEdit() {
+    console.log('Edit successfully');
+  }
+
+  onDelete() {
+    if (this.selected !== null) {
+      this.service.delete(this.selected);
+    }
   }
 }

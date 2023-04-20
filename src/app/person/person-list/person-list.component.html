@@ -1,3 +1,14 @@
+
+<button class="btn btn-success" [disabled]="!selected"
+(click)="onEdit()"
+
+> Edit Person</button>
+
+
+<button class="btn btn-danger"  [disabled]="!selected" (click)="onDelete()
+  ">Delete</button>
+
+
 <table class="table">
     <thead>
       <tr>
@@ -18,3 +29,5 @@
      
     </tbody>
   </table>
+
+   

@@ -6,20 +6,23 @@ import { AppComponent } from './app.component';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { PersonListComponent } from './person/person-list/person-list.component';
+import { PersonService } from './shared/person.service';
+import { RouterModule, Routes } from '@angular/router';
+import { SeminarListComponent } from './seminar/seminar-list/seminar-list.component';
+import { PersonEditComponent } from './person-edit/person-edit.component';
+
+const routes: Routes = [{ path: 'person', component: PersonListComponent },
+
+  {path:'person/:id', component: PersonEditComponent},
+  { path: 'seminar', component: SeminarListComponent},
+  { path: '' , redirectTo:'person', pathMatch:'full'}
+];
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    PersonListComponent,
-   
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent, NavbarComponent, PersonListComponent, SeminarListComponent, PersonEditComponent],
+  imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(routes)],
+  providers: [PersonService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
