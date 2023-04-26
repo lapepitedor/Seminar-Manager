@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Person } from 'src/app/model/Person';
 import { PersonService } from 'src/app/shared/person.service';
 
@@ -8,11 +9,11 @@ import { PersonService } from 'src/app/shared/person.service';
   styleUrls: ['./person-list.component.css'],
 })
 export class PersonListComponent implements OnInit {
-  selected: Person | null = null;
+  selected: Person |null  = null;
 
   objects: Person[] = [];
 
-  constructor(private service: PersonService) {
+  constructor( private route:Router, private service: PersonService) {
     this.objects = this.service.getAll();
     this.service.changed.subscribe(() => {
       this.objects = this.service.getAll();
@@ -27,12 +28,13 @@ export class PersonListComponent implements OnInit {
   }
 
   onEdit() {
-    console.log('Edit successfully');
+    this.route.navigate(['person',this.selected?.id]);
+   
   }
 
   onDelete() {
     if (this.selected !== null) {
-      this.service.delete(this.selected);
+      this.service.delete(this.selected.id);
     }
   }
 }
