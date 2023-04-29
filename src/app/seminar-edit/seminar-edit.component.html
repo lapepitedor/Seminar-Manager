@@ -1,1 +1,27 @@
-<p>seminar-edit works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+  <label for="name" class="form-label">Name:</label>
+  <input type="text" class="form-control" id="name" formControlName="name" 
+  [ngClass]="{
+ 'is-invalid': form.controls['name'].invalid && form.controls['name'].dirty,
+ 'is-valid': form.controls['name'].valid && form.controls['name'].dirty}">
+  </div>
+  <div class="form-group">
+  <label for="venue" class="form-label">Venue:</label>
+  <input type="text" class="form-control" id="venue" formControlName="venue"  [ngClass]="{
+ 'is-invalid': form.controls['venue'].invalid && form.controls['venue'].dirty,
+ 'is-valid': form.controls['venue'].valid && form.controls['venue'].dirty}">
+  </div>
+  <div class="form-group">
+  <label for="date" class="form-label">Date:</label>
+  <input type="text" class="form-control" id="date" formControlName="date"  >
+  <span class="text-danger" *ngIf="form.controls['date'].touched && form.controls['date'].invalid">
+    Date is not valid!
+ </span>
+  </div>
+  <br>
+  <button type="submit"class="btn btn-primary">OK</button>
+  &nbsp;
+   <button class="btn btn-success" (click)="onCancel()">Cancel</button>
+</form>
+

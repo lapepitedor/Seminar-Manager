@@ -17,6 +17,12 @@ import { AuthentificationService } from './shared/authentification.service';
 import { LoginComponent } from './login/login.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './logout/logout.component';
+import { initializeApp } from 'firebase/app';
+import { SeminarService } from './shared/seminar.service';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 const routes: Routes = [
   { path: 'person', component: PersonListComponent, canActivate: [RouteGuard] },
   {
@@ -30,7 +36,7 @@ const routes: Routes = [
     canActivate: [RouteGuard],
   },
   {
-    path: 'person/:edit',
+    path: 'seminar/:id',
     component: SeminarEditComponent,
     canActivate: [RouteGuard],
   },
@@ -43,6 +49,23 @@ const routes: Routes = [
   
   { path: '**', component: PageNotFoundComponent },
 ];
+
+// Import the functions you need from the SDKs you need
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDLMqU6bQP0uIJqyUWRRj5bx-xF1lBsfwA",
+  authDomain: "seminarmanger.firebaseapp.com",
+  projectId: "seminarmanger",
+  storageBucket: "seminarmanger.appspot.com",
+  messagingSenderId: "200606415743",
+  appId: "1:200606415743:web:65410a7f2a4ca33757b84a"
+};
+
 
 
 @NgModule({
@@ -63,8 +86,16 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
   ],
-  providers: [PersonService, RouteGuard, AuthentificationService],
+  providers: [
+    PersonService,
+    SeminarService,
+    RouteGuard,
+    AuthentificationService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

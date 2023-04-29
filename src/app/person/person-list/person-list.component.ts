@@ -37,4 +37,8 @@ export class PersonListComponent implements OnInit {
       this.service.delete(this.selected.id);
     }
   }
+
+  onNew() {
+    this.route.navigate(['person',0]);
+  }
 }

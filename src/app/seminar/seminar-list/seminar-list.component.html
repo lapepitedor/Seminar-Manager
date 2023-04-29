@@ -1,1 +1,36 @@
-<p>seminar-list works!</p>
+
+<button class="btn btn-success" [disabled]="!selected" (click)="onEdit()"
+
+
+> Edit Seminar</button>
+
+&nbsp;
+
+<button class="btn btn-danger"  [disabled]="!selected" (click)="onDelete()
+  "
+  >Delete Seminar</button>
+
+&nbsp;
+
+<button type="button" class="btn btn-success"  (click)="onAdd()">New Seminar </button>
+
+<table class="table">
+    <thead>
+      <tr>
+        <td>#</td>
+        <th>Name</th>
+        <th>Venue</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let seminar of object; let i = index" (click)="onSelected(i)"
+      [ngClass]="seminar == selected ? 'table-info' : '' ">
+         <td>{{i+1}}</td>
+        <td>{{seminar.name}}</td>
+        <td>{{seminar.venue}}</td>
+        <td>{{seminar.date}}</td>
+      </tr>
+     
+    </tbody>
+  </table>

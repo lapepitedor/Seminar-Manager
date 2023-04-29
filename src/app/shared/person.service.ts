@@ -50,4 +50,20 @@ export class PersonService {
     }
     return null;
   }
+
+  save(obj: Person) {
+   
+      let index = this.objects.findIndex(x => x.id == obj.id);
+
+      if (index >= 0) {
+        this.objects[index] = obj;
+      } else {
+        let new_id = Math.max.apply(Math, this.objects.map(function (o) { return o.id; })) + 1;
+        obj.id = new_id;
+        this.objects.push(obj);
+      }
+
+      this.changed.emit(this.getAll());
+    
+  }
 }
